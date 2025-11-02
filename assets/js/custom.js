@@ -232,38 +232,86 @@ if (jQuery('#otp').length > 0)
 
 /*------------------------------------- Redirect link -------------------------------------*/
 $(".redirect-mentor").wrap('<a href="single-mentor.html"></a>');
-$(".single-course").wrap('<a href="single-course-description-screen.html"></a>');
+$(".single-course").wrap('<a href="bundles-description-screen.html"></a>');
 $(".chat-screen-redirect").wrap('<a href="single-chat-screen.html"></a>');
 $(".category-redirect").wrap('<a href="single-course-ongoing.html"></a>');
 $(".complete-course").wrap('<a href="single-course-complete.html"></a>');
 $(".business-course").wrap('<a href="business.html"></a>');
 
+/*------------------------------------- Security Checks -------------------------------------*/
+function checkSession() {
+    // Simulate session check: check if 'userSession' exists in localStorage
+    return localStorage.getItem('userSession') !== null;
+}
+
+function checkAppUpdate() {
+    // Simulate app update check: compare current version with stored version
+    const currentVersion = '1.0.0'; // Assume current app version
+    const storedVersion = localStorage.getItem('appVersion');
+    if (!storedVersion || storedVersion !== currentVersion) {
+        // If no version or mismatch, assume update needed
+        return false; // Needs update
+    }
+    return false; // Up to date
+}
+
+function performSecurityChecks() {
+    const isLoggedIn = checkSession();
+    const needsUpdate = checkAppUpdate();
+
+    if (needsUpdate) {
+        // Handle update: for now, alert or redirect to update page (simulate)
+        alert('App update required. Please update.');
+        // Could redirect to an update page, but since not exists, stay or redirect to login
+        return 'login.html'; // Or create update page
+    } else if (isLoggedIn) {
+        return 'main.html'; // Redirect to main if logged in
+    } else {
+        return 'login.html'; // Redirect to login if not logged in
+    }
+}
+
 /*------------------------------------- Preloader -------------------------------------*/
 $(window).on("load", function() {
     $('.circle').fadeOut();
     $('.loader-mask').delay(350).fadeOut('slow');
+
+    // Perform security checks in background during preloader
+    const redirectTo = performSecurityChecks();
 });
 
 $(window).on("load", function() {
-    $('.loader-mask1').delay(2000).fadeOut(3000);
+    $('.loader-mask1').delay(2000).fadeOut(3000, function() {
+        // After splash fades, redirect based on checks
+        const redirectTo = performSecurityChecks();
+        window.location.href = redirectTo;
+    });
 });
 
 /*------------------------------------- Tab Navigation -------------------------------------*/
 $(document).ready(function() {
-    // Bottom navigation tabs
-    $('.nav-tab').on('click', function() {
-        var tabId = $(this).data('tab');
+// Bottom navigation tabs
+$('.nav-tab').on('click', function() {
+    var tabId = $(this).data('tab');
 
-        // Remove active class from all nav tabs and content
-        $('.nav-tab').removeClass('active');
-        $('.tab-content').removeClass('active');
-        $('.orange-boder').removeClass('active');
+    // Remove active class from all nav tabs and content
+    $('.nav-tab').removeClass('active');
+    $('.tab-content').removeClass('active');
+    $('.orange-boder').removeClass('active');
 
-        // Add active class to clicked nav tab and corresponding content
-        $(this).addClass('active');
-        $(this).next('.orange-boder').addClass('active');
-        $('#' + tabId + '-content').addClass('active');
-    });
+    // Remove all tab-specific classes from body and header
+    $('body').removeClass('home-active bundles-active usage-active rewards-active account-active');
+    $('#top-navbar').removeClass('home-active bundles-active usage-active rewards-active account-active');
+
+    // Add active class to clicked nav tab and corresponding content
+    $(this).addClass('active');
+    $(this).next('.orange-boder').addClass('active');
+    $('#' + tabId + '-content').addClass('active');
+
+    // Add tab-specific class to body and header for styling
+    $('body').addClass(tabId + '-active');
+    $('#top-navbar').addClass(tabId + '-active');
+});
 
     // Balance tabs within home content
     $('.tab').on('click', function() {

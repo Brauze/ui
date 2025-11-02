@@ -120,6 +120,15 @@ textarea {
     padding: 0 16px;
 }
 
+/* Make container background transparent for tab-specific backgrounds */
+body.home-active .container,
+body.bundles-active .container,
+body.usage-active .container,
+body.rewards-active .container,
+body.account-active .container {
+    background: transparent;
+}
+
 .mt-24 {
     margin-top: 24px;
 }
@@ -3104,7 +3113,7 @@ ul.input.date-picker-input {
     margin-bottom: 100px;
 }
 
-.bootom-tabbar {
+.bottom-tabbar {
     margin: 0;
     padding: 0;
     position: relative;
@@ -3115,17 +3124,17 @@ ul.input.date-picker-input {
     text-align: center;
 }
 
-.bootom-tabbar li.active {
+.bottom-tabbar li.active {
     list-style-type: none;
     display: inline-block;
     margin: 0 15px;
     position: relative;
-    top: -32px;
+    top: 0;
     width: 64px;
     height: 64px;
 }
 
-.bootom-tabbar li a.active {
+.bottom-tabbar li a.active {
     width: 56px;
     height: 56px;
     display: flex;
@@ -3148,29 +3157,29 @@ ul.input.date-picker-input {
     display: block;
 }
 
-.bootom-tabbar li.active:before {
+.bottom-tabbar li.active:before {
     content: "";
     position: absolute;
     width: 64px;
     height: 64px;
     border-radius: 30px;
     z-index: -1;
-    top: -4px;
+    top: 0;
     box-shadow: inset 0px -11px 4px -5px #0000001f;
     left: 0;
 }
 
-.bootom-tabbar li {
+.bottom-tabbar li {
     list-style-type: none;
     display: inline-block;
-    margin: 0 15px;
+    margin: 0 9px;
     position: relative;
     top: 0;
     width: 64px;
     height: 64px;
 }
 
-.bootom-tabbar li:before {
+.bottom-tabbar li:before {
     position: relative;
 }
 
@@ -3187,7 +3196,7 @@ ul.input.date-picker-input {
     margin: 0 auto;
 }
 
-.bootom-tabbar li a svg.active path {
+.bottom-tabbar li a svg.active path {
     stroke: white;
 }
 
@@ -3717,6 +3726,13 @@ span.ongoing-txt2 {
     border-radius: 8px;
 }
 
+/* Standard category image dimensions */
+.categories-content img {
+    width: 140px;
+    height: 100px;
+    object-fit: cover;
+}
+
 /************************ 34.Trending Courses Screen ***************************/
 
 .trending-name p {
@@ -3811,6 +3827,86 @@ span.ongoing-txt2 {
 
 .tab-content.active {
     display: block;
+}
+
+/*------------------------------------- Tab-Specific Backgrounds -------------------------------------*/
+body.home-active {
+    background-color: #ffffff; /* Default white for home */
+}
+
+#top-navbar.home-active {
+    background: #ffffff !important;
+}
+
+body.bundles-active {
+    background-color: #fff8f0; /* Light orange for bundles */
+}
+
+#top-navbar.bundles-active {
+    background: #fff8f0 !important;
+}
+
+body.usage-active {
+    background-color: #f0fff8; /* Light green for usage */
+}
+
+#top-navbar.usage-active {
+    background: #f0fff8 !important;
+}
+
+body.rewards-active {
+    background-color: #022148; /* Dark blue for rewards */
+}
+
+#top-navbar.rewards-active {
+    background: #022148 !important;
+}
+
+body.account-active {
+    background-color: #fff0f8; /* Light pink for account */
+}
+
+#top-navbar.account-active {
+    background: #fff0f8 !important;
+}
+
+/*------------------------------------- Rewards Tab Text and Icon Colors -------------------------------------*/
+body.rewards-active h1,
+body.rewards-active h2,
+body.rewards-active h3,
+body.rewards-active h4,
+body.rewards-active h5,
+body.rewards-active h6,
+body.rewards-active p,
+body.rewards-active span,
+body.rewards-active div,
+body.rewards-active .home-first-sec-wrap h1,
+body.rewards-active .home-first-sec-wrap p,
+body.rewards-active .mentor-content-single h3,
+body.rewards-active .mentor-content-single p,
+body.rewards-active .check-txt1,
+body.rewards-active .check-txt2,
+body.rewards-active .check-txt4,
+body.rewards-active .check-txt5,
+body.rewards-active .helpful-txt,
+body.rewards-active .like-txt1,
+body.rewards-active .dislike-txt,
+body.rewards-active .nav-link,
+body.rewards-active .single-mentor-tab li button,
+body.rewards-active .mentor-name h2,
+body.rewards-active .mentor-name h3,
+body.rewards-active .review-para p,
+body.rewards-active .review-bottom-second h4,
+body.rewards-active .review-time p,
+body.rewards-active .helpful-txt,
+body.rewards-active .like-txt1,
+body.rewards-active .dislike-txt {
+    color: #ffffff !important;
+}
+
+body.rewards-active .nav-link.active,
+body.rewards-active .single-mentor-tab li button.active {
+    color: #000000 !important; /* Keep active tab black for contrast */
 }
 
 /*------------------------------------- Main Card Tabs -------------------------------------*/
@@ -4406,7 +4502,7 @@ span.ongoing-txt2 {
 
 /*------------------------------------- 38.Result found screen start -------------------------------------*/
 
-.serachbar-homepage2 {
+.searchbar-homepage2 {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
