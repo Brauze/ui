@@ -248,6 +248,37 @@ $(window).on("load", function() {
     $('.loader-mask1').delay(2000).fadeOut(3000);
 });
 
+/*------------------------------------- Tab Navigation -------------------------------------*/
+$(document).ready(function() {
+    // Bottom navigation tabs
+    $('.nav-tab').on('click', function() {
+        var tabId = $(this).data('tab');
+
+        // Remove active class from all nav tabs and content
+        $('.nav-tab').removeClass('active');
+        $('.tab-content').removeClass('active');
+        $('.orange-boder').removeClass('active');
+
+        // Add active class to clicked nav tab and corresponding content
+        $(this).addClass('active');
+        $(this).next('.orange-boder').addClass('active');
+        $('#' + tabId + '-content').addClass('active');
+    });
+
+    // Balance tabs within home content
+    $('.tab').on('click', function() {
+        var tabId = $(this).data('tab');
+
+        // Remove active class from all balance tabs and sections
+        $('.tab').removeClass('active');
+        $('.balance-section').removeClass('active');
+
+        // Add active class to clicked tab and corresponding section
+        $(this).addClass('active');
+        $('#' + tabId).addClass('active');
+    });
+});
+
 /*------------------------------------- Light Dark Mode -------------------------------------*/
 jQuery('.theme-change').on('click', function() {
     jQuery('.site-content').toggleClass('theme-dark');
@@ -257,18 +288,4 @@ jQuery('.theme-change').on('click', function() {
     } else {
         location.replace("../light-mode/onboarding-screen.html")
     }
-/*------------------------------------- Main Card Tabs -------------------------------------*/
-$(document).ready(function() {
-    $('.tab').click(function() {
-        var tabId = $(this).data('tab');
-
-        // Remove active class from all tabs and sections
-        $('.tab').removeClass('active');
-        $('.balance-section').removeClass('active');
-
-        // Add active class to clicked tab and corresponding section
-        $(this).addClass('active');
-        $('#' + tabId).addClass('active');
-    });
-});
 });
